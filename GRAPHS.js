@@ -89,6 +89,7 @@ function Graph(CanvasID,Height)
 TimeSires.prototype.SetTimeMessage = function()
 {
     var self =this;
+    console.log(self.TimeMessage(event))
     document.getElementById(this.graph.Canvas.id).onmousemove=function (e){self.TimeMessage(event)};
 }
 function TimeSires(CanvasID,Height,datax,datay)
@@ -143,7 +144,7 @@ TimeSires.prototype.TimeMessage = function(event)
     if(check<0)
     {
         var i=math.abs(math.add(NormTime,-x)).indexOf(math.min(math.abs(math.add(NormTime,-x))));
-        div.children("span").html("Ημ/νια και ώρα: <br>"+((new Date(this.graph.Data.DataX[i])).toLocaleString())+"<br>Σκορ: "+this.graph.Data.DataY[i]);
+        div.children("span").html("Date & Hour: <br>"+((new Date(this.graph.Data.DataX[i])).toLocaleString())+"<br>score: "+this.graph.Data.DataY[i]);
         div.fadeIn();
         div.css({
             "left": XX+ "px",
@@ -181,7 +182,7 @@ TimeSires.prototype.PLOT_TimeSiries= function(){
     ctx.lineWidth = 2;
     ctx.font = "24px Arial";
     //time
-    ctx.fillText("Χρόνος",(this.graph.Canvas.width-5- this.graph.StartPos.x-40)/2, ScaleData(-10,this.graph.StartPos.y,this.graph.EndPos.y));
+    ctx.fillText("Time",(this.graph.Canvas.width-5- this.graph.StartPos.x-40)/2, ScaleData(-10,this.graph.StartPos.y,this.graph.EndPos.y));
     //Score
     ctx.fillText("Score",this.graph.StartPos.x-90, ScaleData(70,this.graph.StartPos.y,this.graph.EndPos.y));
 
@@ -296,6 +297,7 @@ HIST.prototype.PLOT_HISTOGRAM = function() {
         if (ctx.measureText(text).width >dx) {
             var h = 0;
             var pos = text.lastIndexOf(" ");
+            console.log(text)
             text = text.substring(0, pos) + "." + text.substring(pos + 1);
             text = text.split(".");
             b = text[1];
@@ -426,7 +428,7 @@ HIST.prototype.HistMessage = function(event) {
             }
             else if (i >= this.graph.Data.DataY.length)
             {
-                div.children("span").html("Μη προσβάσιμο Κεφαλαίο.");
+                div.children("span").html("No Data");
             }
 
 
